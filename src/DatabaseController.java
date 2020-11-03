@@ -28,6 +28,8 @@ public class DatabaseController {
                 Statement statement = conn.createStatement();
 
                 statement.execute("SELECT * FROM listWarehouse ");
+
+                System.out.println("product--type--quantity--price");
                 //get all the records
                 ResultSet results = statement.getResultSet();
                 while (results.next()){
@@ -66,8 +68,12 @@ public class DatabaseController {
             Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\adamo\\IdeaProjects\\ConsoleDBM\\warehouse.db");
             Statement statement = conn.createStatement();
 
-            statement.execute("UPDATE listWarehouse SET " + field + "=" + value + " WHERE " + updateField + "=" + "'" + updateRecord + "'");
-
+            if(updateField.equals("quantity") || updateField.equals("price")){
+                int intUpdateRecord = Integer.parseInt(updateRecord);
+                statement.execute("UPDATE listWarehouse SET " + field + "=" + value + " WHERE " + updateField + "=" + "'" + intUpdateRecord + "'");
+            }else{
+                statement.execute("UPDATE listWarehouse SET " + field + "=" + value + " WHERE " + updateField + "=" + "'" + updateRecord + "'");
+            }
 
         } catch (SQLException e) {
             System.out.println("Something went wrong + " + " " + e.getMessage());

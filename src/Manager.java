@@ -4,6 +4,47 @@ import java.io.InputStreamReader;
 
 public class Manager {
     private DatabaseController db = new DatabaseController();
+    private static boolean quit = true;
+
+    public void menu(){
+        printWelcome();
+
+        while (quit){
+            System.out.println();
+            printOptions();
+            userInputHandler(inputHandler());
+
+        }
+    }
+
+    public void userInputHandler(String input) {
+
+        if(input.equals("create table")){
+            createTable();
+        }else if(input.equals("show table")){
+            showTable();
+        }else if(input.equals("add record")){
+            addRecord();
+        }else if(input.equals("update record")){
+            updateRecord();
+        }else if(input.equals("delete record")){
+            deleteRecord();
+        }else if(input.equals("quit")){
+            quit = false;
+        }else{
+            System.out.println("Wrong input !!!");
+        }
+    }
+
+    public void printWelcome(){
+        System.out.println("Welcome to our warehouse product manager. \nHere you will be able to manage all your products");
+    }
+
+    public void printOptions(){
+        System.out.println("Your options are");
+        System.out.println("create table | show table | add record | update record | delete record | quit");
+        System.out.println();
+    }
 
     public String inputHandler(){
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -32,35 +73,45 @@ public class Manager {
     }
 
     public void addRecord(){
-        System.out.println("Enter the product");
+        System.out.println("/nEnter the product");
         String product = inputHandler();
 
-        System.out.println("Enter the type");
+        System.out.println("/nEnter the type");
         String type = inputHandler();
 
-        System.out.println("Enter the quantity");
+        System.out.println("/nEnter the quantity");
         int quantity = Integer.parseInt(inputHandler());
 
-        System.out.println("Enter the price");
+        System.out.println("/nEnter the price");
         int price = Integer.parseInt(inputHandler());
 
         db.addRecord(product,type,quantity,price);
     }
 
     public void updateRecord(){
-        System.out.println("Enter the product");
+        System.out.println("/nEnter the product");
         String field = inputHandler();
 
-        System.out.println("Enter the type");
+        System.out.println("/nEnter the type");
         String value = inputHandler();
 
-        System.out.println("Enter the quantity");
+        System.out.println("/nEnter the quantity");
         String updateField = inputHandler();
 
-        System.out.println("Enter the price");
+        System.out.println("/nEnter the price");
         String updateRecord = inputHandler();
 
         db.updateRecord(field,value,updateField, updateRecord);
+    }
+
+    public  void deleteRecord(){
+        System.out.println("/nEnter the column name");
+        String column = inputHandler();
+
+        System.out.println("/nEnter the value");
+        String value = inputHandler();
+
+        db.deleteRecord(column,value);
     }
 
 }
