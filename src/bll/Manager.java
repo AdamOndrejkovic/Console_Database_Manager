@@ -1,11 +1,18 @@
+package bll;
+
+import bll.IManager;
+import dbl.DatabaseController;
+import dbl.IDataController;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Manager {
-    private DatabaseController db = new DatabaseController();
+public class Manager implements IManager {
+    private IDataController db = new DatabaseController();
     private static boolean quit = true;
 
+    @Override
     public void menu(){
         printWelcome();
 

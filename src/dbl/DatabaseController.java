@@ -1,11 +1,15 @@
+package dbl;
+
 import java.sql.*;
 
-public class DatabaseController {
+public class DatabaseController implements IDataController {
 
+    @Override
     public void showConn(){
         connDB();
     }
 
+    @Override
     public void createTable(String nameTable) {
         try {
             //connect
@@ -21,6 +25,7 @@ public class DatabaseController {
         }
     }
 
+    @Override
     public void showTable(){
             try {
                 //connect
@@ -47,6 +52,7 @@ public class DatabaseController {
             }
     }
 
+    @Override
     public void addRecord(String product, String type, int quantity, int price){
             try {
                 //connect
@@ -62,6 +68,7 @@ public class DatabaseController {
             }
     }
 
+    @Override
     public void updateRecord(String field, String value, String updateField, String updateRecord) {
         try {
             //connect
@@ -80,6 +87,7 @@ public class DatabaseController {
         }
     }
 
+    @Override
     public void deleteRecord(String field, String value){
         try {
             //connect
